@@ -1,0 +1,173 @@
+@import "tailwindcss";
+
+/* Dark mode is toggled by adding/removing `.dark` on <html> (see ThemeContext) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans:
+    "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:
+    "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* Palette tokens are re-pointed at CSS custom properties below so both
+     themes can share the same utility classes (bg-surface, text-ink, ...). */
+  --color-bg: var(--bg);
+  --color-bg-soft: var(--bg-soft);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-ink: var(--accent-ink);
+
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-slow: float 11s ease-in-out infinite;
+  --animate-blink: blink 1s step-end infinite;
+  --animate-marquee: marquee 28s linear infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+    50% {
+      transform: translate3d(0, -18px, 0);
+    }
+  }
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+:root {
+  /* Light mode — warm ivory surfaces instead of stark white, soft charcoal
+     ink instead of pure black. Tuned to stay easy on the eyes at length. */
+  --bg: #f8f6f1;
+  --bg-soft: #f1eee6;
+  --surface: #fffdf9;
+  --surface-hover: #fbf8f1;
+  --border: #e7e2d5;
+  --border-strong: #d9d2c0;
+  --ink: #2b2a25;
+  --ink-muted: #63615a;
+  --ink-faint: #93908a;
+  --accent: #5847e6;
+  --accent-hover: #4636d1;
+  --accent-soft: #ece9fc;
+  --accent-ink: #ffffff;
+  color-scheme: light;
+}
+
+.dark {
+  /* Dark mode — deep slate rather than true black, warm off-white ink. */
+  --bg: #0c0e12;
+  --bg-soft: #101318;
+  --surface: #14171d;
+  --surface-hover: #191d24;
+  --border: #262a33;
+  --border-strong: #343943;
+  --ink: #ece9e2;
+  --ink-muted: #a2a3ab;
+  --ink-faint: #6b6d76;
+  --accent: #8b85f6;
+  --accent-hover: #a29cff;
+  --accent-soft: #1d1b3a;
+  --accent-ink: #0c0e12;
+  color-scheme: dark;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
+    border-radius: 999px;
+    border: 2px solid var(--bg);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--ink-faint);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, var(--border) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+  .mask-fade-b {
+    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+}
