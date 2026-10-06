@@ -1,0 +1,264 @@
+%-------------------------
+% Rezume, a latex resume template for developers
+% Author : Nanu Panchamurthy
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+
+% Hope this resume template helps you land an awesome job. If you found this helpful, please consider starring the github repo here, .
+%-------------------------
+
+
+
+%------------PACKAGES----------------
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{verbatim} % reimplements the "verbatim" and "verbatim*" environments
+
+\usepackage{titlesec} % provides an interface to sectioning commands i.e. custom elements
+
+\usepackage{color} % provides both foreground and background color management
+
+\usepackage{enumitem} % provides control over enumerate, itemize and description
+
+\usepackage{fancyhdr} % provides extensive facilities for constructing headers, footers and also controlling their use
+
+\usepackage{tabularx} % defines an environment tabularx, extension of "tabular" with an extra designator x, paragraph like column whose width automatically expands to fill the width of the environment
+
+\usepackage{latexsym} % provides mathematical symbols
+
+\usepackage{marvosym} % provides martin vogel's symbol font which contains various symbols
+
+\usepackage[empty]{fullpage} % sets margins to one inch and removes headers, footers etc..
+
+\usepackage[hidelinks]{hyperref} % removes color and shadow of hyperlinks
+
+\usepackage[normalem]{ulem} % provides "\ul" (uline) command which will break at line breaks
+
+\usepackage[english]{babel} % provides culturally determined typographical rules for wide range of languages
+%-----------------------------------------
+
+\input glyphtounicode % converts glyph names to unicode
+\pdfgentounicode=1 % ensures pdfs generated are ats readable
+
+%----------FONT OPTIONS-------------------
+\usepackage[default]{sourcesanspro} % uses the font source sans pro
+\urlstyle{same} % changes url font from default urlfont to font being used by the document
+%-----------------------------------------
+
+
+%----------MARGIN OPTIONS-----------------
+\pagestyle{fancy} % set page style to one configured by fancyhdr
+\fancyhf{} % clear all header and footer fields
+
+\renewcommand{\headrulewidth}{0in} % sets thickness of linerule under header to zero
+\renewcommand{\footrulewidth}{0in} % sets thickness of linerule over footer to zero
+
+\setlength{\tabcolsep}{0in} % sets thickness of column separator in tables to zero
+
+% origin of the document is one inch from the top and from and the left
+% oddsidemargin and evensidemargin both refer to the left margin
+% right margin is indirectly set using oddsidemargin
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\topmargin}{-0.5in}
+
+\addtolength{\textwidth}{1.0in} % sets width of text area in the page to one inch
+\addtolength{\textheight}{1.0in} % sets height of text area in the page to one inch
+
+\raggedbottom{} % makes all pages the height of current page, no extra vertical space added
+\raggedright{} % makes all pages the width of current page, no extra horizontal space added
+%------------------------------------------
+
+
+%--------SECTIONING COMMANDS---------
+% \titleformat{<command>}
+%   [<shape>]{<format>}{<label>}{<sep>}
+%     {<before-code>}[<after-code>]
+
+% command is the sectioning command to be redefined
+% shape is the style of the font; scshape stands for small caps style
+% format is the format to be applied to whole title- label and text; absent here
+% label defines the label
+% sep is the horizontal separation between label and title body
+% before-code is the code to be executed before
+% after-code is the code to be executed after
+
+\titleformat{\section}
+  {\scshape\large}{}
+    {0em}{\color{blue}}[\color{black}\titlerule\vspace{0pt}]
+%-------------------------------------
+
+
+%--------REDEFINITIONS----------------
+% redefines the style of the bullet point
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+% redefines the underline depth to 2pt
+\renewcommand{\ULdepth}{2pt}
+%-------------------------------------
+
+
+%--------CUSTOM COMMANDS--------------
+%\vspace{} defines a vertical space of given size, modifying this in custom commands can help stretch or shrink resume to remove or add content
+
+% resumeItem renders a bullet point
+\newcommand{\resumeItem}[1]{
+  \item\small{#1}
+}
+
+% commands to start and end itemization of resumeItem, rightmargin set to 0.11in to avoid the overflow of resumetItem beyond whatever resumeItemHeading is being used
+\newcommand{\resumeItemListStart}{\begin{itemize}[rightmargin=0.11in]}
+\newcommand{\resumeItemListEnd}{\end{itemize}}
+
+% resumeSectionType renders a bolded type to be used under a section, used as skill type here, middle element is used to keep ":"s in the same vertical line
+\newcommand{\resumeSectionType}[3]{
+  \item\begin{tabular*}{0.96\textwidth}[t]{
+    p{0.19\linewidth}p{0.02\linewidth}p{0.77\linewidth}
+  }
+    \textbf{#1} & #2 & #3
+  \end{tabular*}\vspace{-2pt}
+}
+
+% resumeTrioHeading renders three elements in three columns with second element being italicized and first element bolded, can be used for projects with three elements
+\newcommand{\resumeTrioHeading}[3]{
+  \item\small{
+    \begin{tabular*}{0.96\textwidth}[t]{
+      l@{\extracolsep{\fill}}c@{\extracolsep{\fill}}r
+    }
+      \textbf{#1} & \textit{#2} & #3
+    \end{tabular*}
+  }
+}
+
+% resumeQuadHeading renders four elements in a two columns with the second row being italicized and first element of first row bolded, can be used for experience and projects with four elements
+\newcommand{\resumeQuadHeading}[4]{
+  \item
+  \begin{tabular*}{0.96\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & #2 \\
+    \textit{\small#3} & \textit{\small #4} \\
+  \end{tabular*}
+}
+
+% resumeQuadHeadingChild renders the second row of resumeQuadHeading, can be used for experience if different roles in the same company need to added
+\newcommand{\resumeQuadHeadingChild}[2]{
+  \item
+  \begin{tabular*}{0.96\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{\small#1} & {\small#2} \\
+  \end{tabular*}
+}
+
+% commands to start and end itemization of resumeQuadHeading, lefmargin for left indent of 0.15in for resumeItems
+\newcommand{\resumeHeadingListStart}{
+  \begin{itemize}[leftmargin=0.15in, label={}]
+}
+\newcommand{\resumeHeadingListEnd}{\end{itemize}}
+%-------------------------------------------
+
+
+%__________________RESUME____________________
+% You can rearrange sections in any order you may prefer
+\begin{document}
+
+%-----------CONTACT DETAILS------------------
+\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+  \textbf{\Huge Neeraj Kumar \vspace{2pt}} &
+  Location: Bengaluru, Karnataka, India \\
+  \href{https://neeraj-kumar-1.netlify.app/}{\uline{Portfolio}} $|$
+  \href{https://linkedin.com/}{\uline{LinkedIn}} $|$
+  \href{https://github.com/}{\uline{GitHub}} &
+  Email: \href{mailto:neeraj17399@gmail.com}{\uline{neeraj17399@gmail.com}} $|$
+  Mobile: +91 7979861143 \\
+\end{tabular*}
+%--------------------------------------------
+
+
+%-----------SUMMARY--------------------------
+\section{Summary}
+\small{
+  \textbf{Frontend Developer} with \textbf{2.8 years of experience} building secure, scalable React applications. Proficient in \textbf{React.js, TypeScript, Node.js, and GraphQL}. Hands-on experience with secure authentication (\textbf{Keycloak/OAuth 2.0}), \textbf{AWS} cloud services, and CI/CD using \textbf{Docker and Jenkins}. Passionate about building intuitive UI for cybersecurity and real-time data platforms.
+}
+%--------------------------------------------
+
+
+%--------------SKILLS------------------------
+\section{Technical Skills}
+  \resumeHeadingListStart{}
+    \resumeSectionType{Languages}{:}{JavaScript (ES6+), TypeScript, Java, HTML5, CSS3, Data Structures \& Algorithms}
+    \resumeSectionType{Frameworks}{:}{Next.js, Node.js, Express.js, Tailwind CSS, Bootstrap}
+    \resumeSectionType{Libraries}{:}{React.js, Redux, Material-UI, React Router, Angular, GraphQL, Vue.js}
+    \resumeSectionType{Testing}{:}{Jest, React Testing Library}
+    \resumeSectionType{Tools \& Platforms}{:}{Git, GitHub, Docker, Podman, Jenkins, Keycloak, Linux, Figma, MS Office, MS Excel, AWS (IAM, EC2, S3, Lambda)}
+    \resumeSectionType{Soft Skills}{:}{Communication, Time Management, Problem-Solving, Leadership, Punctuality}
+  \resumeHeadingListEnd{}
+%--------------------------------------------
+
+
+%-----------EXPERIENCE-----------------------
+\section{Professional Experience}
+\resumeHeadingListStart{}
+  \resumeQuadHeading{Rayvector Technologies}{July 2025 -- Present}
+  {Software Developer}{Bengaluru}
+
+  \resumeQuadHeadingChild{Poleshift TRP \textmd{\textit{-- React.js, TypeScript, Apache ECharts, TanStack Router, React Query, Zustand}}}{Aug 2025 -- Present}
+    \resumeItemListStart{}
+      \resumeItem{Led \textbf{end-to-end delivery} of a US political analytics platform by managing client communication, aligning Frontend, Backend and DevOps teams, and driving sprint planning from requirement gathering to production release}
+      \resumeItem{Built a \textbf{React 18+ TypeScript SPA} with maps, \textbf{Apache ECharts} visualization, multi-level political views (Federal, State, Local and School Board), and a secure \textbf{role-based admin system} using TanStack Router, React Query \& Zustand}
+      \resumeItem{Engineered a multi-step \textbf{candidate ranking engine} with tier assignment, voter search with \textbf{real-time filters} (party, district, position, geolocation), and paginated data views across complex political datasets}
+    \resumeItemListEnd{}
+
+  \resumeQuadHeadingChild{Neriva AOI \textmd{\textit{-- C++, Crow, Boost.Beast, WebSocket, ZeroMQ, Angular 19}}}{Dec 2025 -- Present}
+    \resumeItemListStart{}
+      \resumeItem{Built a \textbf{C++ API service} (Crow REST + Boost.Beast WebSocket) with \textbf{ZeroMQ} event relay, streaming live AOI pipeline state to the browser in real time}
+      \resumeItem{Developed an \textbf{Angular 19} real-time inspection dashboard with a WebSocket-driven pipeline stepper, live log terminal, and brightfield/darkfield image viewer with cross-scan bleed protection}
+      \resumeItem{Engineered a filesystem-backed cascading analytics viewer with \textbf{6-level drill-down filters} and direct PNG streaming, \textbf{replacing a separate file server} dependency entirely}
+    \resumeItemListEnd{}
+
+  \resumeQuadHeadingChild{Arise \textmd{\textit{-- CMS, Firebase, Azure, AWS, GCP, Google Street View API}}}{July 2025 -- Nov 2025}
+    \resumeItemListStart{}
+      \resumeItem{Led the development of a \textbf{CMS platform} for managing industrial zones, blending clean design with strong engineering}
+      \resumeItem{Built custom dashboards, data visualization and scalable cloud integration across \textbf{Firebase, Azure, AWS and GCP}}
+      \resumeItem{Implemented the \textbf{Google Street View API} for immersive zone mapping}
+    \resumeItemListEnd{}
+
+  \resumeQuadHeading{Keen \& Able Computers Pvt Ltd}{Oct 2023 -- Feb 2025}
+  {Frontend Developer}{Noida}
+
+  \resumeQuadHeadingChild{Fino NACH \textmd{\textit{-- Next.js, TypeScript, Redux, Tailwind CSS, Keycloak}}}{Oct 2024 -- Jan 2025}
+    \resumeItemListStart{}
+      \resumeItem{Developed the frontend \textbf{from scratch} using \textbf{Next.js, TypeScript, Redux, and Tailwind CSS}}
+      \resumeItem{Created scalable modules for \textbf{merchant onboarding} and operations management}
+      \resumeItem{Integrated secure authentication using \textbf{Keycloak with OAuth 2.0}; validated user inputs to prevent \textbf{XSS and CSRF} vulnerabilities}
+      \resumeItem{Collaborated with cross-functional teams (design/backend) under \textbf{Agile} methodology to deliver robust UI}
+    \resumeItemListEnd{}
+
+  \resumeQuadHeadingChild{Fino MTA \textmd{\textit{-- React.js, Redux, Tailwind CSS}}}{April 2023 -- Oct 2024}
+    \resumeItemListStart{}
+      \resumeItem{Built dynamic, \textbf{reusable UI components} using \textbf{React.js} and \textbf{Redux} for state management}
+      \resumeItem{Applied \textbf{Tailwind CSS} for responsive and clean interface design}
+      \resumeItem{Ensured maintainable, high-performance code following industry best practices}
+      \resumeItem{Worked closely with team members to meet feature and sprint delivery timelines}
+    \resumeItemListEnd{}
+
+  \resumeQuadHeadingChild{NIC MyGov Portal \textmd{\textit{-- Next.js, Redux, TypeScript, Tailwind CSS}}}{Oct 2023 -- April 2024}
+    \resumeItemListStart{}
+      \resumeItem{Worked on the frontend using \textbf{Next.js}, \textbf{Redux} for state management, \textbf{TypeScript}, and \textbf{Tailwind CSS}}
+      \resumeItem{Developed and implemented the Home page and two sections: \textit{Tourism in India} and \textit{Facts of India}}
+      \resumeItem{Ensured \textbf{responsive, accessible UI} matching design expectations}
+      \resumeItem{Collaborated with other teams to maintain consistent structure across components}
+    \resumeItemListEnd{}
+\resumeHeadingListEnd{}
+%---------------------------------------------
+
+
+%-----------EDUCATION-------------------------
+\section{Education}
+  \resumeHeadingListStart{}
+    \resumeQuadHeading{M S Ramaiah University of Applied Sciences}{Bangalore, Karnataka, India}
+    {Bachelor of Technology}{Aug 2018 -- June 2022}
+    \resumeQuadHeading{Infant Jesus School}{Patna, Bihar, India}
+    {Intermediate (Class XII)}{April 2016 -- April 2017}
+    \resumeQuadHeading{Infant Jesus School}{Patna, Bihar, India}
+    {Matriculation (Class X)}{April 2014 -- April 2015}
+  \resumeHeadingListEnd{}
+%---------------------------------------------
+
+\end{document}

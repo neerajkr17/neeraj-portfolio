@@ -20,7 +20,7 @@ export const profile = {
   email: "neeraj17399@gmail.com",
   phone: "+91 7979861143",
   summary:
-    "Frontend Developer with 2.8 years of experience building secure, scalable React applications. Proficient in React.js, TypeScript, Node.js, and GraphQL. Hands-on experience with secure authentication (Keycloak/OAuth 2.0), AWS cloud services, and CI/CD using Docker and Jenkins. Passionate about building intuitive UI for cybersecurity and real-time data platforms.",
+    "Frontend Developer with 2 years 9 months of experience building secure, scalable React applications. Proficient in React.js, TypeScript, Node.js, and GraphQL. Hands-on experience with secure authentication (Keycloak/OAuth 2.0), AWS cloud services, and CI/CD using Docker and Jenkins. Passionate about building intuitive UI for cybersecurity and real-time data platforms.",
   resumeUrl: "/Neeraj-Kumar-Resume.pdf",
 };
 
@@ -32,7 +32,7 @@ export const socials: SocialLink[] = [
 ];
 
 export const stats: StatEntry[] = [
-  { label: "Years of experience", value: 2.8, suffix: "+" },
+  { label: "Years of experience", value: 2.7, suffix: "+" },
   { label: "Companies", value: 2 },
   { label: "Shipped engagements", value: 6 },
   { label: "Core stack tools", value: 15, suffix: "+" },
